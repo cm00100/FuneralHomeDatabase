@@ -1,0 +1,67 @@
+    create database if not exists funeralhome;
+    
+    use funeralhome;
+    
+    drop table if exists deathmembers, customers, cemetery;
+    
+    create table deathmembers(deathID int primary key auto_increment
+    
+    , FirstName varchar(25)
+    , LastName varchar(25)
+    , Gender char(2)
+    , Birthdate varchar(25)
+    , Died varchar(25)
+    , CauseOfDeath varchar(25)
+    , Cemetary varchar(225)
+    ) ;
+    
+    insert into deathmembers (deathID, FirstName, LastName, Gender, Birthdate, Died, CauseOfDeath, Cemetary) values 
+    (9001,'John', 'Doe', 'M', '04/15/1800', '05/23/2015', 'Suicide', 'Soledad Cemetary')
+    ,(7893,'Jane', 'Doe', 'F', '05/15/1878', '02/21/2012', 'Heart Failure', 'Gonzales Cemetary')
+    ,(8890,'Sponge', 'Bob', 'M', '02/10/1995', '04/11/2013', 'Gun Shot', 'Salinas Cemetary')
+    ,(1019,'Lola', 'Jimenez', 'F', '04/15/1800', '05/23/2015', 'Asthma', 'Cementerio El Encinal')
+    ,(5676,'Tom', 'Williams', 'M', '12/02/1889', '06/12/1995', 'Heat Stroke', 'Soledad Cemetary')
+	,(4565,'John', 'Doe', 'M', '08/10/1990', '02/01/2012', 'Car Accident', 'Soledad Cemetary')
+;
+    
+
+create table customers (custID int primary key
+, FirstName varchar(25)
+, LastName varchar(25)
+, Address varchar(25)
+, City varchar(25)
+, State varchar(2)
+, Zip int (5)
+, Telephone bigint
+, FeesPaid decimal(10,2)
+, ServiceType varchar(25)
+, deathID int
+, foreign key (deathID) references deathmembers(deathID)
+);
+
+
+insert into customers (custID, FirstName, LastName, Address, City, State, Zip, Telephone, FeesPaid, ServiceType, deathID) values
+  (78,'Johnny', 'Doe', '222 Castro St', 'San Francisco', 'CA', 94101,8311234567,  2000, 'Cremation',  9001)
+  ,(81,'Bob', 'Willis', '9220 Sunset Blvd', 'Hollywood', 'CA', 90028, 8318765432, 5600, 'Sky Burial', 7893)
+  ,(55,'Pancho', 'Rodriguez', '5647 Tryon', 'Los Angeles', 'CA', 90001,8319873456, 6400, 'Cannibalism',  8890)
+  ,(67,'Panchita', 'De La Cruz', '1148 4TH ST', 'Santa Monica', 'CA', 90401, 8318901203,  2500, 'Earth Burial',1019)
+  ,(90, 'Candy', 'Boo', '4131 Morro Dr.', 'Woodland Hills', 'CA', 91302,83105438567, 1550, 'Moon Burial',  5676)
+  ,(45, 'Cherry', 'Lucious', 'P.O. Box 49991', 'Los Angeles', 'CA', 90001,8315043700,  1550, 'Cremation', 4565);
+  
+create table cemetery (
+  cemID int(5) unsigned not null
+, Cemetery varchar(25)
+, City varchar (25)
+, State varchar (2)
+, Zip int (5)
+, Telephone bigint
+, deathID int (5)
+);
+
+insert into cemetery (cemID, Cemetery, City, State, Zip, Telephone, deathID) values
+(111,'Soledad Cemetery', 'Soledad', 'CA', 93960, 8315555555, 9001)
+,(222,'Gonzales Cemetery', 'Gonzales', 'CA', 93926, 83144444444,7893)
+,(333,'Salinas Cemetery', 'Salinas', 'CA', 93901, 83133333333, 8890)
+,(444,'Cemeterio El Encinal', 'Monterey', 'CA', 93940, 8312222222, 1019)
+,(111,'Soledad Cemetery', 'Soledad', 'CA', 93960, 8315555555, 5676)
+,(111,'Soledad Cemetery', 'Soledad', 'CA', 93960, 8315555555, 4565);
